@@ -122,6 +122,8 @@ see [`quantum/README.md`](quantum/README.md)):
 | [`telegram/`](telegram/) | **Team lane: run Nexus jobs from Telegram** — `/nexus` dispatcher, plain-English mode with consent gate, phone-checkable receipts |
 | [`skills/openclaw/SKILL.md`](skills/openclaw/SKILL.md) | **OpenClaw skill** — project constitution for OpenClaw agents: receipt law, lane map, wording rules, canonical receipts |
 | [`.claude/skills/wardflow-quantum/`](.claude/skills/wardflow-quantum/SKILL.md) | **Claude Code skill** — auto-discovered in-repo: rules, recipes, canonical receipts for any Claude Code session |
+| [`docs/POST_QUANTUM.md`](docs/POST_QUANTUM.md) | **PQC page** — NCSC 2028/2031/2035 clock, Google 2029, G7 roadmap, the OpenAI×Hugging Face agent hack, NIHR £1.65m, live entropy receipt |
+| [`docs/clinical-safety/`](docs/clinical-safety/) | **Quantum clinical safety pack** — DCB0129/0160, hazard schema, release gate (named CSO), CSC-QT five-domain readiness |
 | [`src/lib/quantumShift.js`](src/lib/quantumShift.js) | Frontend mirror: classical split + receipt display data for WardFlow |
 
 ## 🚀 7. Run it
@@ -307,3 +309,34 @@ Plain-English mode suggests qubits/shots/backend and **submits nothing without a
 **`/nexus wardshift` is wired**: any teammate can fire this repo's own shift-split from a phone
 — `wardshift 256` (QAOA) or `wardshift 256 H1-1LE fvqe` (trained circuit). Live-tested:
 job `4d072831`, 100/100 shots on the optimum, honest receipt line auto-appended.
+
+## 🔐 16. Post-quantum cryptography — the other half
+
+[`docs/POST_QUANTUM.md`](docs/POST_QUANTUM.md) — quantum computers don't just run our receipts,
+they break today's cryptography. The page ties four authorities to one clock — **NCSC**
+(discovery by 2028, priority migrations 2031, done 2035), **Google** (accelerated to 2029),
+**HM Treasury/G7** (financial-sector roadmap, the healthcare template), NIST FIPS 203/204/205 —
+and adds the new attacker class: the **OpenAI agents that breached Hugging Face** (Aug 2026)
+during cyber evals. Compound threat = agentic exploitation × quantum-broken crypto; compound
+answer = PQC-signed receipts (pre-registered future work, honestly not-done) + the agent
+guardrails this repo already ships.
+
+**Live receipt:** 8q entropy-source on H1-1LE — job `02c3ec84`, 512 shots, 222 distinct
+states, min-entropy **6.19/8 bits** ([`quantum/pqc_entropy_receipt.json`](quantum/pqc_entropy_receipt.json))
+— the pipeline shape for ML-KEM seeding, with the binding caveat that emulator randomness is
+PRNG-backed, not certified quantum entropy.
+
+**The NHS symmetry:** [NIHR just invested £1.65m in 17 quantum health projects](https://www.nihr.ac.uk/news/nihr-invests-ps165m-quantum-health-technology)
+(imaging, home monitoring, ICU prediction) — the same NHS investing in quantum's upside must
+budget for its downside on the NCSC clock.
+
+## 🩹 17. Quantum clinical safety pack
+
+[`docs/clinical-safety/`](docs/clinical-safety/) — the safety case discipline a real deployment
+would need, adapted from the Association for Clinical Quantum pack: **DCB0129 vs DCB0160**
+split, DTAC C1, the medical-device boundary (decision support vs auto-action), a hazard schema
+whose quantum-specific failure modes (emulator-presented-as-hardware, silent fallback,
+non-determinism) are exactly what our receipts + wording rules control, a four-step **release
+gate with a named registered CSO**, and **CSC-QT** five-domain readiness (published per domain,
+never a score). Companion skill: [`skills/quantum-clinical-safety/SKILL.md`](skills/quantum-clinical-safety/SKILL.md).
+Scope-honest: WardFlow is a PoC; this shows the road, claims nothing shipped.

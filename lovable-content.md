@@ -297,6 +297,21 @@ repo's own 4q receipt from a phone.
 
 ---
 
+## 5e. PQC + safety page blocks (`/quantum/pqc`, `/quantum/safety`)
+
+**PQC page** — render [`docs/POST_QUANTUM.md`](docs/POST_QUANTUM.md): a timeline strip
+(NCSC 2028 → Google 2029 → NCSC 2031 → NCSC 2035), an incident card for the OpenAI×Hugging
+Face agent breach ("the attacker timeline just compressed"), the trust-chain diagram
+(quantum receipt → ML-DSA signature → quantum entropy), the live entropy receipt card
+(job `02c3ec84`, H_min 6.19/8 bits, with the PRNG caveat rendered prominently — never as a
+"quantum-safe" badge), and the NIHR £1.65m symmetry line.
+
+**Safety page** — render [`docs/clinical-safety/`](docs/clinical-safety/): DCB0129/0160 split
+cards, the 5×5 hazard matrix, the four-step release gate as a stepper ending on the named
+CSO signature, CSC-QT as five domain chips (no total, no percentage — per-domain only).
+
+---
+
 ## 6. What NOT to say
 
 - ❌ “Quantum beats classical at job sorting”
@@ -304,6 +319,9 @@ repo's own 4q receipt from a phone.
 - ❌ “NICE recommends quantum verification”
 - ❌ Any cancer/BCAC/etc. references
 - ❌ Rendering the "signed" trust chip as done (it's future work on the card)
+- ❌ Any "quantum-safe" / "PQC-protected" badge — ML-DSA signing is pre-registered future work
+- ❌ Calling emulator entropy "certified quantum randomness" (job `02c3ec84` is pipeline-shape only)
+- ❌ Totalling or percentaging the CSC-QT domains — per-domain readiness only
 
 ---
 

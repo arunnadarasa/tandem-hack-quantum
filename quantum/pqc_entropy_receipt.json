@@ -1,0 +1,13 @@
+{
+  "job_id": "02c3ec84-ee44-47fb-b63b-b62e0347bedb",
+  "backend": "H1-1LE",
+  "backend_qualifier": "emulator",
+  "shots": 512,
+  "n_qubits": 8,
+  "distinct_states": 222,
+  "min_entropy_per_8bit_sample": 6.193,
+  "max_entropy": 8.0,
+  "raw_bits_sampled": 4096,
+  "honest_note": "Emulator run: PRNG-backed, NOT certified quantum entropy. Pipeline demo for PQC key seeding; certified entropy requires QPU hardware or Quantum Origin.",
+  "pqc_use": "seed material shape for ML-KEM (FIPS 203) keygen"
+}

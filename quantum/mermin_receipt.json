@@ -1,0 +1,24 @@
+{
+  "job_id": "38e6edf5-e96c-433c-a5bd-5bfd95fc0a35",
+  "backend": "H1-1LE",
+  "backend_qualifier": "emulator",
+  "shots_per_setting": 512,
+  "settings": [
+    "XXX",
+    "XYY",
+    "YXY",
+    "YYX"
+  ],
+  "expectations": {
+    "XXX": 1.0,
+    "XYY": -1.0,
+    "YXY": -1.0,
+    "YYX": -1.0
+  },
+  "mermin_M": 4.0,
+  "classical_bound": 2.0,
+  "quantum_max": 4.0,
+  "violation": true,
+  "honest_note": "Mermin-game structure = the exact Bell-test primitive Quantum Origin uses for provable randomness. Emulator run: demonstrates the verification pipeline, NOT certified randomness (emulator physics is simulated). Certified seeds come from Quantum Origin on real hardware.",
+  "citation": "Quantum Origin Beyond Statistical Testing white paper (Mermin game, min-entropy ~0.85, security parameter 2^-128)"
+}

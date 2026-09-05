@@ -56,6 +56,42 @@ threat note on digital signatures says long-lived trust anchors should move *bef
 exists. So the receipts layer must be **PQC-signed from the start**: ML-DSA for routine
 receipt signing, SLH-DSA for the long-lived root that anchors an audit trail.
 
+### Quantum Origin: the future integration (and our live Mermin receipt)
+
+**[Quantum Origin](https://docs.quantinuum.com/origin/user_guides/introduction/summary.html)**
+is Quantinuum's provable QRNG — the natural next rung for WardFlow's receipt chain. Per its
+[Beyond Statistical Testing white paper](https://cdn.prod.website-files.com/669960f53cd73aedb80c8eea/68e6630bf74d4f7c8809bc7f_Quantum%20Origin%20-%20Beyond%20Statistical%20Testing%20White%20Paper%5B71%5D.pdf)
+and [technical whitepaper](https://cdn.prod.website-files.com/669960f53cd73aedb80c8eea/66da564bce3f80e2827db453_6670683dc0f4a03b3ac9def3_quantum-origin-technical-whitepaper_r03.pdf):
+
+- **Proof, not statistics.** Millions of 3-qubit circuits play a **Mermin game** (a Bell test)
+  on Quantinuum hardware; violating the Bell inequality *mathematically proves* the outcomes
+  can't be predetermined — min-entropy lower-bounded (~0.85), then extractor-refined to a
+  near-perfect **Quantum Seed** with security parameter 2⁻¹²⁸. Statistical testing (NIST
+  SP 800-22) can't do this: a designed single-bit bias could need ~4.9×10²⁵ samples to detect.
+- **Software-deployed.** The quantum hardware is used ONCE at seed generation; deployment is
+  pure software (CLI / Linux–Windows reseed / HSM integrations) — no hardware, no cloud link.
+  The seed can even be *public*: a strong extractor keeps output independent of it, only the
+  local source stays private.
+- **The WardFlow fit:** Quantum Origin seed → ML-KEM/ML-DSA keygen → PQC-signed WardFlow
+  receipts. Every link then carries a proof: the receipt (execution), the signature
+  (post-quantum), the entropy (Bell-test-certified). Pre-registered future work — a
+  `quantum-origin` integration is a config choice, not a research problem.
+
+**We ran Quantum Origin's own primitive on Nexus.** Same Mermin-game structure, one job
+(`38e6edf5`, H1-1LE, 4 circuits × 512 shots): GHZ prepared, measured in XXX/XYY/YXY/YYX,
+Mermin value
+
+> **M = 4.0000** — the quantum maximum. Classical hidden-variable bound: 2. All four
+> correlators exact: ⟨XXX⟩=+1, ⟨XYY⟩=⟨YXY⟩=⟨YYX⟩=−1.
+> Receipt: [`../quantum/mermin_receipt.json`](../quantum/mermin_receipt.json)
+
+Honest scope, as always: a noiseless *emulator* saturating the Tsirelson-like bound
+demonstrates the verification **pipeline** — a simulator can fake a Bell violation, physics
+can't be certified from simulated physics. Real certification is exactly the service Quantum
+Origin sells, run on real trapped ions where M > 2 is a physical impossibility for any
+classical process. That's the difference between our demo and their product — and why the
+integration slot exists.
+
 ### Live Nexus receipt: the entropy end of the chain
 
 We ran an 8-qubit entropy-source circuit (H on all qubits, measure) on **H1-1LE** —
@@ -88,7 +124,8 @@ priority migrations by 2031, done by 2035. A hackathon project that ships quantu
 |---|---|
 | ✅ Quantum execution receipts with job IDs + envelopes (4q→98q) | ⬜ ML-DSA-signed receipt JSONs (FIPS 204 via a maintained PQC library) |
 | ✅ 98q Iceberg-style parity receipt — tamper-evidence *structure* | ⬜ SLH-DSA long-lived root key for the receipt chain |
-| ✅ Quantum entropy pipeline demo (job `02c3ec84`, honest emulator caveat) | ⬜ Certified entropy source (QPU / Quantum Origin) feeding ML-KEM keygen |
+| ✅ Quantum entropy pipeline demo (job `02c3ec84`, honest emulator caveat) | ⬜ **Quantum Origin integration**: Bell-test-certified Quantum Seed → extractor → ML-KEM keygen (software-only deploy: CLI / reseed / HSM) |
+| ✅ **Mermin game on Nexus — M = 4.0000** (job `38e6edf5`), Quantum Origin's own verification primitive, pipeline demo'd | ⬜ Same test on real trapped-ion hardware, where violation = physical proof |
 | ✅ Agent guardrails: consent gates, skill constitutions, secret scans | ⬜ NCSC-style discovery inventory for WardFlow's own (tiny) crypto estate |
 
 *Rule of the house applies: the PQC roadmap column is pre-registered future work.

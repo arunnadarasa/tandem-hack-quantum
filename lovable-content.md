@@ -306,6 +306,13 @@ Face agent breach ("the attacker timeline just compressed"), the trust-chain dia
 (job `02c3ec84`, H_min 6.19/8 bits, with the PRNG caveat rendered prominently — never as a
 "quantum-safe" badge), and the NIHR £1.65m symmetry line.
 
+**Quantum Origin card** (add to the PQC page): "Randomness you can prove, not just test."
+Three-step visual: Mermin game on Quantinuum hardware → Bell violation = mathematical proof
+(min-entropy 0.85, security 2⁻¹²⁸) → software-deployed Quantum Seed (can even be public).
+Below it, our live receipt chip: **M = 4.0000 / classical bound 2** (job `38e6edf5`,
+H1-1LE, 4×512 shots) with the caveat "emulator = pipeline demo; hardware = proof — that's
+the Quantum Origin integration slot." Never render this as certified randomness.
+
 **Safety page** — render [`docs/clinical-safety/`](docs/clinical-safety/): DCB0129/0160 split
 cards, the 5×5 hazard matrix, the four-step release gate as a stepper ending on the named
 CSO signature, CSC-QT as five domain chips (no total, no percentage — per-domain only).

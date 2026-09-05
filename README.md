@@ -326,6 +326,15 @@ states, min-entropy **6.19/8 bits** ([`quantum/pqc_entropy_receipt.json`](quantu
 — the pipeline shape for ML-KEM seeding, with the binding caveat that emulator randomness is
 PRNG-backed, not certified quantum entropy.
 
+**New: the Mermin game — Quantum Origin's own primitive, run on Nexus.** Quantinuum's
+[Quantum Origin](https://docs.quantinuum.com/origin/user_guides/introduction/summary.html)
+proves randomness via Bell tests (Mermin games) instead of statistical testing. We ran the
+same structure on H1-1LE — job `38e6edf5`: GHZ measured in XXX/XYY/YXY/YYX gives
+**M = 4.0000, the quantum maximum** (classical bound 2, all four correlators exact) —
+[`quantum/mermin_receipt.json`](quantum/mermin_receipt.json). Emulator = pipeline demo;
+on real ions the violation is physical proof, which is precisely the Quantum Origin product
+and our pre-registered integration slot (seed → ML-KEM → PQC-signed receipts).
+
 **The NHS symmetry:** [NIHR just invested £1.65m in 17 quantum health projects](https://www.nihr.ac.uk/news/nihr-invests-ps165m-quantum-health-technology)
 (imaging, home monitoring, ICU prediction) — the same NHS investing in quantum's upside must
 budget for its downside on the NCSC clock.

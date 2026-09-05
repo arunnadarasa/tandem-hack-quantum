@@ -53,6 +53,10 @@ three disciplines and refuse to shortchange any of them:
     *published, cited* method upgrade (vendor methods preferred), re-run under the same
     pre-registered bar. F-VQE turned 0.1875 into 1.0000 that way. Post-hoc tweaking of
     angles or thresholds after seeing the data remains the cardinal sin.
+12. **Diagnose the layer before acting.** A 75-minute RUNNING job on a physics-model
+    emulator is healthy; the same wait on a statevector lane is a bug. Know what each
+    backend actually computes (transport model vs amplitude math vs stabilizer tableau)
+    and read `running_time` before cancelling anything. Patience is also a discipline.
 
 ## Operating Loop
 

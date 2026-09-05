@@ -143,9 +143,25 @@ native Guppy→HUGR programs on **Helios-1E-lite** (Quantinuum's next-generation
 |---|---|---|
 | 26q GHZ (entanglement scale) | `0fc1f87b` | **Perfect: 512/512 shots on `0…0`/`1…1`** (272+240), GHZ-mass **1.0000** — 26 qubits fully entangled, only 2 distinct outcomes |
 | 26q QAOA p=1 (whole-ward split) | `67f9d2f4` | Mean sampled cut **43.61** vs 43.05 uniform-random baseline; 512 distinct states over a 67M-state space — explores, doesn't concentrate (consistent with the 8q finding; F-VQE is the known fix) |
-| Same pair, pytket lane (H2-1LE) | `48f53972` | still RUNNING — cross-lane check pending |
+| Same pair, pytket lane (H2-1LE) | `48f53972` | still RUNNING after 75+ min — **expected, see below** |
 
 Full counts: [`quantum/ward26_results.json`](quantum/ward26_results.json).
+
+### Why the same circuits take minutes on Helios and hours on H2-1LE
+
+Not a fault — an architecture lesson. The H1/H2 emulators run a **physical model of the
+QCCD ion trap**: ion transport between gate zones, per-shot execution, the machine's real
+timing structure. Cost scales with qubits × gates × **shots** — our 26q job is 2 programs ×
+512 shots × 117 gates through that physics engine. Helios-1E-lite's statevector simulator
+skips the transport model entirely and just does the amplitude math, so the identical
+circuits returned in minutes.
+
+Practical rule (now in the skill): 4–8q runs anywhere; ≥16q on H1/H2 lanes budget 30–90+
+minutes and slim the job (one program, fewer shots) for demos; reach for Helios
+statevector/stabilizer when turnaround matters and the physics-noise model isn't the point.
+`RUNNING, error None` means healthy in-queue emulation — check `running_time` before
+assuming failure. The slow lane isn't wasted: the H1/H2 physics model is precisely what
+makes their *noisy* receipts meaningful.
 
 ### Why Helios matters (the future-scale slide)
 

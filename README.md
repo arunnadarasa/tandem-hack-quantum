@@ -121,6 +121,7 @@ see [`quantum/README.md`](quantum/README.md)):
 | [`docs/QUANTUM_CARD.md`](docs/QUANTUM_CARD.md) | **Quantum model card** (arXiv:2412.13151 × NVIDIA skill-card): entity, intended use, all receipts, limitations, trust controls |
 | [`telegram/`](telegram/) | **Team lane: run Nexus jobs from Telegram** — `/nexus` dispatcher, plain-English mode with consent gate, phone-checkable receipts |
 | [`skills/openclaw/SKILL.md`](skills/openclaw/SKILL.md) | **OpenClaw skill** — project constitution for OpenClaw agents: receipt law, lane map, wording rules, canonical receipts |
+| [`.claude/skills/wardflow-quantum/`](.claude/skills/wardflow-quantum/SKILL.md) | **Claude Code skill** — auto-discovered in-repo: rules, recipes, canonical receipts for any Claude Code session |
 | [`src/lib/quantumShift.js`](src/lib/quantumShift.js) | Frontend mirror: classical split + receipt display data for WardFlow |
 
 ## 🚀 7. Run it
@@ -223,6 +224,13 @@ three evidence laws, the verified backend lane map with config classes and qubit
 operational pitfalls, canonical receipt table, and the Telegram consent gate. Drop the
 `skills/` dir into any OpenClaw resource package (`"skills": ["skills/*/SKILL.md"]` in
 `package.json`) and the agent inherits the whole practice.
+
+**Claude Code** ([code.claude.com/docs](https://code.claude.com/docs)):
+[`.claude/skills/wardflow-quantum/SKILL.md`](.claude/skills/wardflow-quantum/SKILL.md) —
+auto-discovered when you open this repo in Claude Code (mirror at
+[`skills/claude-code/SKILL.md`](skills/claude-code/SKILL.md)). Fires on any quantum-circuit or
+receipt-citing task: binding rules, verified lane map with the exact interpreter path for the
+Bash tool, submit-only pattern, Guppy/pytket traps, canonical receipts, and sync duties.
 
 **Hermes**: [`skills/quantinuum/SKILL.md`](skills/quantinuum/SKILL.md) — the full Quantinuum/Nexus agent
 skill used to build this repo, updated with this hackathon's lessons: AerConfig vs

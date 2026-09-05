@@ -4,6 +4,11 @@
 > Built on the WardFlow ward-round board ([NXGN-x-Tandem-Health-26](https://github.com/jemmahwatson/NXGN-x-Tandem-Health-26), PR [#1](https://github.com/jemmahwatson/NXGN-x-Tandem-Health-26/pull/1)).
 >
 > **One-line pitch:** WardFlow decides. Quantum signs the receipt.
+>
+> **Headline result:** all 26 qubits — one per ward job — entangled in a perfect GHZ state on
+> **Quantinuum Helios** (next-gen stack, native Guppy→HUGR lane): **512/512 shots**, GHZ-mass 1.0000,
+> job `0fc1f87b`. Plus a 4q shift-split driven to **100% optimum mass** with Quantinuum's own
+> published F-VQE method (job `bb1021a2`). Receipts for everything, advantage claimed for nothing.
 
 ## 1. The problem
 
@@ -135,6 +140,28 @@ native Guppy→HUGR programs on **Helios-1E-lite** (Quantinuum's next-generation
 | Same pair, pytket lane (H2-1LE) | `48f53972` | still RUNNING — cross-lane check pending |
 
 Full counts: [`quantum/ward26_results.json`](quantum/ward26_results.json).
+
+### Why Helios matters (the future-scale slide)
+
+**Helios is Quantinuum's next-generation system** — the successor to H1/H2 on the roadmap toward
+Sol and Apollo (fault tolerance). It is not just a bigger box; it is a different programming model,
+and this repo exercised it natively:
+
+- **Different lane, same team.** H1/H2 take pytket circuits through compile jobs. Helios rejects
+  compile jobs entirely — programs are written in **Guppy** (quantum-first Python dialect), compiled
+  locally to **HUGR** (Quantinuum's hierarchical program representation), uploaded, and executed
+  directly. Our 26q GHZ and QAOA ran through this exact pipeline
+  ([`quantum/ward26_helios.py`](quantum/ward26_helios.py)).
+- **Real-time classical compute in-loop.** The Helios runtime supports arbitrary control flow,
+  mid-circuit measurement and qubit reuse — published at 98 qubits with real-time data streaming
+  (Niroula et al., arXiv:2511.03689). For WardFlow this is the growth path: a future receipt could
+  *react* to measured outcomes mid-execution (e.g. conditional re-splits), not just sample a
+  fixed circuit.
+- **What we proved today:** the whole-ward problem (26 jobs = 26 qubits) fits the Helios emulator
+  in one shot-batch, the Guppy→HUGR lane works end-to-end from a laptop, and the entanglement
+  scale is real — a 26-qubit GHZ state is exactly the resource class receipts-with-teeth need
+  (any tampering with a GHZ-signed record breaks the correlation pattern detectably).
+- **What we did not prove:** any speedup. Emulator, classically simulable, wording rule below.
 
 **Wording rule (binding):** a 26-qubit emulator run shows **scale trajectory / hardware-scale
 readiness**, NOT quantum advantage — it is still classically simulable. Advantage stays a

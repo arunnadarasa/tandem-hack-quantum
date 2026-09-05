@@ -1,0 +1,89 @@
+{
+  "method": "F-VQE-style exponential filtering (Amaro 2022 inspired)",
+  "ansatz": "Ry x3 layers + CX ring, 12 params",
+  "tau": 0.6,
+  "eta": 0.4,
+  "iters": 120,
+  "seed": 11,
+  "training": "exact statevector (noiseless, classical loop \u2014 honest scope)",
+  "final_opt_mass_noiseless": 1.0,
+  "qaoa_baseline_h1_1le": 0.1875,
+  "uniform": 0.125,
+  "top_states_bitorder_q0_first": [
+    [
+      "1010",
+      0.8307
+    ],
+    [
+      "0101",
+      0.1693
+    ],
+    [
+      "0000",
+      0.0
+    ],
+    [
+      "1000",
+      0.0
+    ],
+    [
+      "0100",
+      0.0
+    ],
+    [
+      "1100",
+      0.0
+    ]
+  ],
+  "history": [
+    {
+      "iter": 0,
+      "objective": 0.1606,
+      "opt_mass": 0.1092
+    },
+    {
+      "iter": 20,
+      "objective": 0.6652,
+      "opt_mass": 0.6396
+    },
+    {
+      "iter": 40,
+      "objective": 0.9702,
+      "opt_mass": 0.9689
+    },
+    {
+      "iter": 60,
+      "objective": 0.9985,
+      "opt_mass": 0.9984
+    },
+    {
+      "iter": 80,
+      "objective": 0.9998,
+      "opt_mass": 0.9998
+    },
+    {
+      "iter": 100,
+      "objective": 1.0,
+      "opt_mass": 1.0
+    },
+    {
+      "iter": 119,
+      "objective": 1.0,
+      "opt_mass": 1.0
+    }
+  ],
+  "params": [
+    0.006051,
+    3.141593,
+    3.141593,
+    0.0,
+    0.0,
+    7.131355,
+    0.0,
+    0.0,
+    6.283185,
+    3.141593,
+    0.006051,
+    3.141593
+  ]
+}

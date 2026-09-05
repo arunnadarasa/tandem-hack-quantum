@@ -140,6 +140,21 @@
     "sv1": {
       "status": "honest-gap",
       "note": "BraketConfig(local=False) requires s3_bucket/s3_folder (AWS account); local=True returned Nexus 500 (trace c6e7fe2b). Recorded honestly."
+    },
+    "H1-1LE_fvqe_trained": {
+      "job_id": "bb1021a2-c777-4040-99ca-fd07796ea7ed",
+      "shots": 256,
+      "optimum_mass": 1.0,
+      "uniform_mass": 0.125,
+      "envelope": 0.1768,
+      "verdict": "PASS",
+      "backend_qualifier": "emulator",
+      "counts": {
+        "0101": 57,
+        "1010": 199
+      },
+      "method": "F-VQE-style filtering (Amaro 2022), trained noiseless statevector, certified on H1-1LE",
+      "baseline_qaoa_p1": 0.1875
     }
   }
 }

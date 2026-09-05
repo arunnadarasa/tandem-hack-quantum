@@ -140,3 +140,26 @@ skill used to build this repo, updated with this hackathon's lessons: AerConfig 
 QuantinuumConfig, PhasedX two-param trap, Helios Guppy quirks (no zz_phase → CX·Rz·CX,
 output not result, measurement-array read pattern), and the submit-only/journal pattern
 that survives queue backlogs.
+
+## 11. F-VQE upgrade — from honest negative to certified optimum
+
+Following **Amaro et al. 2022** (*Quantum Sci. Technol.* 7 015021 — filtering-VQE for job
+scheduling, Quantinuum authors; `Articles Brain`), we replaced the unoptimized QAOA p=1 with an
+F-VQE-style loop: hardware-efficient ansatz (3× Ry layers + CX ring, 12 params), exponential
+filter f(E)=e^(−τE/2), parameter-shift gradients, 120 iterations on an exact statevector.
+
+| Stage | Optimum-state mass |
+|---|---|
+| Uniform baseline | 0.125 |
+| QAOA p=1, unoptimized angles (H1-1LE) | 0.1875 |
+| **F-VQE trained, certified on H1-1LE (job `bb1021a2`)** | **1.0000** — 256/256 shots on `1010`/`0101` |
+
+Training curve: 0.11 → 0.64 (iter 20) → 0.97 (iter 40) → 1.00 (iter 100). Artifacts:
+[`quantum/ward_shift_fvqe.py`](quantum/ward_shift_fvqe.py) ·
+[`quantum/ward_shift_fvqe_training.json`](quantum/ward_shift_fvqe_training.json).
+
+**Honest scope:** training ran on a noiseless classical statevector (standard VQE practice);
+the certificate is the *final trained circuit* sampled on H1-1LE. The claim is "a
+Quantinuum-published method solves our toy exactly, receipt attached" — still not a
+quantum-advantage claim (4 qubits is trivially classical). It converts the earlier honest
+negative (unoptimized angles don't concentrate) into a method-validated positive.

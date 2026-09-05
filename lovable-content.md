@@ -73,7 +73,7 @@ QAOA p=1 angles unoptimised; pattern ranking #5/#6 — honest, not claimed.
 | 0101 | 23 |
 | 1010 | 25 |
 
-Optimum patterns `0101`/`1010` = **18.75%** of shots vs **12.5%** uniform.  
+Optimum patterns `0101`/`1010` = **18.75%** of shots vs **12.5%** uniform (untrained QAOA).\n**F-VQE upgrade (Amaro 2022, Quantinuum method): 100% of 256 shots on the optimum states** — job `bb1021a2`, certified on H1-1LE.  
 Result verified: envelope `4√(0.5/256) ≈ 0.088`, verdict **PASS**.  
 [Job `7f8ad56f` on Nexus](https://qnexus.nexus.quantumcomputing.co.uk/jobs/7f8ad56f-...`).qr.png`
 

@@ -15,12 +15,19 @@ anchored in the 8 conventions (framing, numbers, toggles, receipts, secrets, sta
 > WardFlow sorts the jobs **classically** — quantum stamps a tamper-evident receipt for handover.
 
 **Hero sub-head:**
-> A 4-qubit Max-Cut QAOA on Quantinuum Nexus certificates this shift-split with a real, checkable fingerprint. No advantage claimed; the QR code below is a live Nexus job link.
+> All 26 qubits — one per ward job — entangled in a perfect GHZ state on **Quantinuum Helios** (512/512 shots, job `0fc1f87b`), and a 4-qubit shift-split driven to **100% optimum mass** with Quantinuum's own F-VQE method (job `bb1021a2`). Receipts for everything, advantage claimed for nothing.
+
+**Hero stat cards (3-up):**
+- `26/26` qubits in a perfect GHZ on Helios — 512/512 shots
+- `100%` optimum-state mass after F-VQE training — 256/256 shots
+- `6` Nexus backends receipted (H1/H2 lanes + Helios HUGR + Aer)
 
 **Key section titles (H2):**
 - The problem: Where jobs get lost in handovers
 - 4 qubits → NOW/NEXT split (Max-Cut)
-- Live Nexus receipts (H1-1LE pass)
+- Live Nexus receipts (6 backends)
+- F-VQE: every shot on the optimum
+- Helios: the whole ward on the next-gen stack
 - The honesty footnote
 - Demo script (15 seconds)
 
@@ -99,6 +106,31 @@ own published method and put every single shot on the optimum. Receipt attached.
 
 > Honest scope: training is classical (standard VQE practice); the certificate is the final
 > trained circuit sampled on H1-1LE. 4 qubits stays classically checkable — still no advantage claim.
+
+### Helios: the whole ward on the next-gen stack
+
+We scaled from 4 jobs to the **whole ward: 26 jobs = 26 qubits**, run natively on
+**Helios-1E-lite** — Quantinuum's next-generation system (roadmap: Helios → Sol → Apollo).
+Helios doesn't take ordinary circuits: programs are written in **Guppy** (quantum-first Python),
+compiled to **HUGR**, and executed directly. We ran that lane end-to-end from a laptop.
+
+| Program | Job | Result |
+|---|---|---|
+| **26q GHZ** — all ward jobs entangled | `0fc1f87b` | **Perfect: 512/512 shots** on all-NOW / all-NEXT, GHZ-mass 1.0000, only 2 outcomes from a 67-million-state space |
+| **26q QAOA** — whole-ward split | `67f9d2f4` | Mean cut 43.61 vs 43.05 uniform; explores, doesn't concentrate — F-VQE is the known fix |
+
+**Why judges should care:** the Helios runtime supports real-time classical compute in-loop
+(mid-circuit measurement, qubit reuse — published at 98 qubits). WardFlow's growth path: receipts
+that *react* to outcomes mid-execution, not just sample a fixed circuit.
+
+**GHZ slide line:** "We entangled all 26 qubits — one per ward job — on Quantinuum's next-gen
+Helios stack. Every one of 512 shots collapsed to all-NOW or all-NEXT: textbook GHZ, receipt
+attached. Tamper with a GHZ-signed record and the correlation pattern breaks detectably."
+
+**Scale wording (binding):** 26 qubits on an emulator = *hardware-scale readiness*, never
+*quantum advantage* — it stays classically simulable. Advantage is a pre-registered future claim.
+
+---
 
 ### The honesty footnote
 

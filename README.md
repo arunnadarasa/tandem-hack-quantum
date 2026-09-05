@@ -1,18 +1,40 @@
-# tandem-hack-quantum
+<div align="center">
 
-> Quantum capability cherry-on-top for the **NXGN x Tandem Health hackathon** (Sep 2026, London).
-> Built on the WardFlow ward-round board ([NXGN-x-Tandem-Health-26](https://github.com/jemmahwatson/NXGN-x-Tandem-Health-26), PR [#1](https://github.com/jemmahwatson/NXGN-x-Tandem-Health-26/pull/1)).
->
-> **One-line pitch:** WardFlow decides. Quantum signs the receipt.
->
-> **Headline result:** all 26 qubits — one per ward job — entangled in a perfect GHZ state on
-> **Quantinuum Helios** (next-gen stack, native Guppy→HUGR lane): **512/512 shots**, GHZ-mass 1.0000,
-> job `0fc1f87b`, then **all 98 qubits — Helios's full published capacity — in a perfect GHZ
-> plus a tamper-evident parity receipt** (jobs `b3d1c274`/`8eddb96d`, stabilizer lane). Plus a 4q
-> shift-split driven to **100% optimum mass** with Quantinuum's own published F-VQE method
-> (job `bb1021a2`). Receipts for everything, advantage claimed for nothing.
+# ⚛️ tandem-hack-quantum
 
-## 1. The problem
+### *WardFlow decides. Quantum signs the receipt.* 🏥✍️
+
+[![Quantinuum Nexus](https://img.shields.io/badge/Quantinuum-Nexus-1a1a2e?style=for-the-badge&logo=atom&logoColor=00d4ff)](https://nexus.quantinuum.com)
+[![Helios 98q](https://img.shields.io/badge/Helios-98%20qubits-7b2ff7?style=for-the-badge)](https://docs.quantinuum.com/systems/)
+[![F--VQE 100%](https://img.shields.io/badge/F--VQE-100%25%20optimum-00c853?style=for-the-badge)](quantum/ward_shift_fvqe_training.json)
+[![CQM v1.3](https://img.shields.io/badge/Methodology-CQM%20v1.3-ff6f00?style=for-the-badge)](docs/clinical-quantum-methodology.md)
+
+[![Receipts](https://img.shields.io/badge/🧾_receipts-everything-2ea44f?style=flat-square)](quantum/)
+[![Advantage](https://img.shields.io/badge/⚠️_advantage_claimed-nothing-red?style=flat-square)](#-9-scale-up-receipts-8q-and-26q)
+[![Telegram](https://img.shields.io/badge/📱_team_lane-%2Fnexus_wardshift-26A5E4?style=flat-square&logo=telegram)](telegram/)
+[![DPIA](https://img.shields.io/badge/🔒_DPIA-GREEN_·_synthetic_only-brightgreen?style=flat-square)](#-5-methodology)
+
+**Quantum cherry-on-top for the [NXGN x Tandem Health hackathon](https://luma.com/di47g8vk)** (Sep 2026, London)
+built on the WardFlow ward-round board · [upstream repo](https://github.com/jemmahwatson/NXGN-x-Tandem-Health-26) · [PR #1](https://github.com/jemmahwatson/NXGN-x-Tandem-Health-26/pull/1)
+
+</div>
+
+---
+
+## 🏆 Headline results — the one-day scale ladder
+
+| 🪜 | Circuit | Backend | Receipt | Result |
+|---|---|---|---|---|
+| 4q | Shift-split **F-VQE** (Amaro 2022) | H1-1LE | `bb1021a2` | 🎯 **100% optimum mass** — 256/256 shots |
+| 8q | Shift-split QAOA p=2 | 4 backends | `e7e1a809`+ | 📝 honest negative, committed |
+| 26q | Whole-ward **GHZ** | Helios (HUGR) | `0fc1f87b` | 💯 **perfect** — 512/512 shots |
+| **98q** | Hospital-scale **GHZ + parity** | Helios (stabilizer) | `b3d1c274` / `8eddb96d` | 💯 **perfect** — full published Helios capacity |
+
+> 🧾 *Receipts for everything, advantage claimed for nothing.*
+
+---
+
+## 🩺 1. The problem
 
 Junior doctors lose ward-round time criss-crossing bays and chasing jobs. WardFlow already fixes the
 organising half: free-text ward-round plans become a sorted, assignable job list with handover in one click.
@@ -23,7 +45,7 @@ This repo adds that receipt as an **optional quantum capability layer**: a tiny 
 Quantinuum's Nexus stack, whose sampling fingerprint is bound to one handover. Small circuit, real
 receipt, honest claim.
 
-## 2. How it works (30-second version)
+## ⚙️ 2. How it works (30-second version)
 
 1. **Classical stays in charge.** WardFlow sorts the ward's jobs the normal, fast, explainable way
    (category workflow order → status → bay/bed). Nothing about the decision changes.
@@ -34,7 +56,7 @@ receipt, honest claim.
    Optimum patterns (`0101`, `1010`, cut = 10) carry measurably above-uniform mass, binding the receipt
    to *this* handover — it can't be quietly edited after the fact.
 
-## 3. The circuit
+## 🔌 3. The circuit
 
 One qubit per job (`J0` bedside bloods, `J1` imaging request, `J2` review NEWS 7, `J3` referral).
 Qubit reads `0` = NOW shift, `1` = NEXT shift. QAOA p=1, angles in halfturns (γ = 0.5, β = 0.4).
@@ -53,7 +75,7 @@ Conflict graph (ring): J0–J1 = 3, J1–J2 = 1, J2–J3 = 4, J3–J0 = 2.
 Classical optimum: cut = 10, states `0101` / `1010` (verified by brute force in the runner).
 Runnable builder: [`quantum/ward_shift_circuit.py`](quantum/ward_shift_circuit.py).
 
-## 4. Live proof — Nexus receipts
+## 🧾 4. Live proof — Nexus receipts
 
 Pre-registered bar ([`quantum/ward_shift_protocol.json`](quantum/ward_shift_protocol.json)):
 **PASS** if optimum-state mass ≥ uniform mass (2/16 = 0.125) minus envelope 4√(0.5/shots).
@@ -75,7 +97,7 @@ Full counts: [`quantum/ward_shift_receipts.json`](quantum/ward_shift_receipts.js
 QAOA angles are unoptimized and p=1 is shallow, so the optimum states rank #5/#6 rather than #1 —
 reported as-is. That is the honest-negative discipline below.
 
-## 5. Methodology
+## 📐 5. Methodology
 
 Built under **Clinical Quantum Methodology v1.2** (problem-first, toy-first gate, honest negatives —
 see [`quantum/README.md`](quantum/README.md)):
@@ -85,7 +107,7 @@ see [`quantum/README.md`](quantum/README.md)):
 - **Honest negatives are deliverables.** Unoptimized angles, Aer/sv1 config gap, and the #5/#6 optimum ranking are all reported, not hidden.
 - **Safety by design (DPIA GREEN).** Synthetic dummy jobs only — no patient data, no NHS numbers, nothing leaves the laptop except a 4-qubit circuit.
 
-## 6. Repo map
+## 🗺️ 6. Repo map
 
 | Path | What |
 |---|---|
@@ -100,7 +122,7 @@ see [`quantum/README.md`](quantum/README.md)):
 | [`telegram/`](telegram/) | **Team lane: run Nexus jobs from Telegram** — `/nexus` dispatcher, plain-English mode with consent gate, phone-checkable receipts |
 | [`src/lib/quantumShift.js`](src/lib/quantumShift.js) | Frontend mirror: classical split + receipt display data for WardFlow |
 
-## 7. Run it
+## 🚀 7. Run it
 
 Needs the Hermes venv python (qnexus + pytket live there) and Nexus auth:
 
@@ -116,7 +138,7 @@ node -e "import('./src/lib/quantumShift.js').then(m=>console.log(m.classicalShif
 # → {"now":["J1 imaging request","J3 referral"],"next":["J0 bedside bloods","J2 review NEWS7"],"cut":10}
 ```
 
-## 8. Demo script (2 minutes)
+## 🎤 8. Demo script (2 minutes)
 
 1. Show WardFlow sorting the ward's jobs (classical, explainable).
 2. Show the slide: four jobs → four qubits → NOW/NEXT split.
@@ -128,7 +150,7 @@ node -e "import('./src/lib/quantumShift.js').then(m=>console.log(m.classicalShif
 on Quantinuum's stack signs it, giving the next shift a receipt nobody can fake. Small circuit, real
 receipt, honest claim."
 
-## 9. Scale-up receipts (8q and 26q)
+## 🪜 9. Scale-up receipts (8q and 26q)
 
 **8-qubit, QAOA p=2, 512 shots, 4 backends (COMPLETED):** optimum cut = 23 (2 states of 256).
 Mean sampled cut beats the uniform baseline (12.49) on all four backends — H1-1LE 12.92,
@@ -148,7 +170,7 @@ native Guppy→HUGR programs on **Helios-1E-lite** (Quantinuum's next-generation
 
 Full counts: [`quantum/ward26_results.json`](quantum/ward26_results.json).
 
-### Why the same circuits take minutes on Helios and hours on H2-1LE
+### ⏱️ Why the same circuits take minutes on Helios and hours on H2-1LE
 
 Not a fault — an architecture lesson. The H1/H2 emulators run a **physical model of the
 QCCD ion trap**: ion transport between gate zones, per-shot execution, the machine's real
@@ -164,7 +186,7 @@ statevector/stabilizer when turnaround matters and the physics-noise model isn't
 assuming failure. The slow lane isn't wasted: the H1/H2 physics model is precisely what
 makes their *noisy* receipts meaningful.
 
-### Why Helios matters (the future-scale slide)
+### 🌌 Why Helios matters (the future-scale slide)
 
 **Helios is Quantinuum's next-generation system** — the successor to H1/H2 on the roadmap toward
 Sol and Apollo (fault tolerance). It is not just a bigger box; it is a different programming model,
@@ -190,7 +212,7 @@ and this repo exercised it natively:
 readiness**, NOT quantum advantage — it is still classically simulable. Advantage stays a
 pre-registered future claim gated on real QPU runs with matched classical baselines.
 
-## 10. Hermes skill
+## 🧠 10. Hermes skill
 
 [`skills/quantinuum/SKILL.md`](skills/quantinuum/SKILL.md) — the full Quantinuum/Nexus agent
 skill used to build this repo, updated with this hackathon's lessons: AerConfig vs
@@ -198,7 +220,7 @@ QuantinuumConfig, PhasedX two-param trap, Helios Guppy quirks (no zz_phase → C
 output not result, measurement-array read pattern), and the submit-only/journal pattern
 that survives queue backlogs.
 
-## 11. F-VQE upgrade — from honest negative to certified optimum
+## 📈 11. F-VQE upgrade — from honest negative to certified optimum
 
 Following **Amaro et al. 2022** (*Quantum Sci. Technol.* 7 015021 — filtering-VQE for job
 scheduling, Quantinuum authors; `Articles Brain`), we replaced the unoptimized QAOA p=1 with an
@@ -221,7 +243,7 @@ Quantinuum-published method solves our toy exactly, receipt attached" — still 
 quantum-advantage claim (4 qubits is trivially classical). It converts the earlier honest
 negative (unoptimized angles don't concentrate) into a method-validated positive.
 
-## 12. 98 qubits — the full Helios
+## 🌠 12. 98 qubits — the full Helios
 
 The Helios Product Data Sheet specifies **98 Ba⁺ qubits**; Quantinuum's own team ran 98q live
 (Niroula et al., arXiv:2511.03689). A 98-qubit statevector is physically impossible (2⁹⁸
@@ -240,7 +262,7 @@ Runner: [`quantum/ward98_helios.py`](quantum/ward98_helios.py) · counts:
 whole hospital, every step on Quantinuum Nexus with job IDs. Same wording rule as §9: this is
 hardware-scale readiness on an emulator, not quantum advantage.
 
-## 13. Agent soul
+## 👻 13. Agent soul
 
 [`AGENT_SOUL.md`](AGENT_SOUL.md) — the **world-class clinical quantum agent engineer** persona
 that built this repo: the creed (problem-first, receipts-or-it-didn't-happen, honest negatives,
@@ -248,7 +270,7 @@ wording discipline, pre-registration, journal-at-submit), the operating loop, an
 Pair it with [`skills/quantinuum/SKILL.md`](skills/quantinuum/SKILL.md) to reproduce this
 working style in any capable agent.
 
-## 14. Quantum card
+## 🪪 14. Quantum card
 
 [`docs/QUANTUM_CARD.md`](docs/QUANTUM_CARD.md) — the layer's **quantum model card**, following
 Everitt & Ji (*Model Cards for Quantum Technologies Reporting*, arXiv:2412.13151) crossed with
@@ -256,7 +278,7 @@ the NVIDIA-verified skill-card trust template (cataloged / scanned / evaluated /
 One table holds every circuit, backend, job ID and verdict; one section holds every limitation.
 If a number on the card drifts from `quantum/*.json`, that's a bug.
 
-## 15. Team lane — quantum receipts from Telegram
+## 📱 15. Team lane — quantum receipts from Telegram
 
 Vendored from [`telegram-quantum-hermes`](https://github.com/arunnadarasa/telegram-quantum-hermes):
 any team member can run Nexus jobs from a phone via a Hermes Telegram gateway — `/nexus bench`,

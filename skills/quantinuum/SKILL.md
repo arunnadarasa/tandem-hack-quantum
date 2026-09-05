@@ -286,6 +286,8 @@ builder). Touching any pre-v1 code? Read `references/guppy-v1-migration.md` firs
 
 34e. **Long Nexus waits inside background terminal processes get SIGTERM-killed.** Never put `wait_for` loops in a notify background job — use the submit-only pattern: upload→compile→execute, journal `{backend: execute_job_id}` to a JSON file, exit fast; fetch results in a later poll call via `qnx.jobs.get(id=...)` + `download_result()`. (Same lesson as the aqora 903-job Gram, now confirmed on the Nexus lane.)
 
+34f. **Helios official workflow: cost-check before execute.** `prediction = qnx.hugr.cost(programs=[ref], n_shots=[S])` then `HeliosConfig(system_name=..., max_cost=prediction, ...)` — the HQC guardrail for paid Helios-1E (lite emulator tolerates omitting it). Blessed import path: `qnx.models.HeliosConfig` / `qnx.models.HeliosEmulatorConfig`. Docs.quantinuum.com Guppy pages track v0.21 (`result`, `measure(q)`), NOT the 1.0 venv (`output`, `measure(q).read()`) — never paste doc snippets into the Hermes-venv lane unmodified. Selene also ships Classical/Quantum **Replay simulators** (feed a measurement-outcome list, deterministically walk the program's branches) — the unit-test tool for feed-forward kernels. Microsoft QDK `pip install "qsharp[qiskit]"` gives a local `ResourceEstimatorBackend` (qsharp.interop.qiskit) for fault-tolerant logical-qubit/T-count estimates — the honest quantitative basis for any 'future advantage' slide.
+
 35. **Iceberg attestation post-selection: the "recovery" is NEGATIVE in noiseless
     simulation.** The iceberg benefit (F_detected > F_raw) only appears WITH noise.
     In noiseless simulation (StatevectorSampler, H1-1LE emulator), the parity

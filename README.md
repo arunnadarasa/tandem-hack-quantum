@@ -120,6 +120,7 @@ see [`quantum/README.md`](quantum/README.md)):
 | [`quantum/README.md`](quantum/README.md) | CQM framing: phases, 10-Year Plan anchor, verdict rule |
 | [`docs/QUANTUM_CARD.md`](docs/QUANTUM_CARD.md) | **Quantum model card** (arXiv:2412.13151 × NVIDIA skill-card): entity, intended use, all receipts, limitations, trust controls |
 | [`telegram/`](telegram/) | **Team lane: run Nexus jobs from Telegram** — `/nexus` dispatcher, plain-English mode with consent gate, phone-checkable receipts |
+| [`skills/openclaw/SKILL.md`](skills/openclaw/SKILL.md) | **OpenClaw skill** — project constitution for OpenClaw agents: receipt law, lane map, wording rules, canonical receipts |
 | [`src/lib/quantumShift.js`](src/lib/quantumShift.js) | Frontend mirror: classical split + receipt display data for WardFlow |
 
 ## 🚀 7. Run it
@@ -212,9 +213,18 @@ and this repo exercised it natively:
 readiness**, NOT quantum advantage — it is still classically simulable. Advantage stays a
 pre-registered future claim gated on real QPU runs with matched classical baselines.
 
-## 🧠 10. Hermes skill
+## 🧠 10. Agent skills (Hermes + OpenClaw)
 
-[`skills/quantinuum/SKILL.md`](skills/quantinuum/SKILL.md) — the full Quantinuum/Nexus agent
+Two agent frameworks, one honest practice:
+
+**OpenClaw** ([docs.openclaw.ai](https://docs.openclaw.ai)): [`skills/openclaw/SKILL.md`](skills/openclaw/SKILL.md)
+— the project constitution in OpenClaw skill format (frontmatter + binding rules): framing,
+three evidence laws, the verified backend lane map with config classes and qubit ceilings,
+operational pitfalls, canonical receipt table, and the Telegram consent gate. Drop the
+`skills/` dir into any OpenClaw resource package (`"skills": ["skills/*/SKILL.md"]` in
+`package.json`) and the agent inherits the whole practice.
+
+**Hermes**: [`skills/quantinuum/SKILL.md`](skills/quantinuum/SKILL.md) — the full Quantinuum/Nexus agent
 skill used to build this repo, updated with this hackathon's lessons: AerConfig vs
 QuantinuumConfig, PhasedX two-param trap, Helios Guppy quirks (no zz_phase → CX·Rz·CX,
 output not result, measurement-array read pattern), and the submit-only/journal pattern

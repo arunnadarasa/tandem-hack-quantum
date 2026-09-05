@@ -1,0 +1,93 @@
+{
+  "protocol": {
+    "backends": [
+      "H1-1LE",
+      "H2-1LE",
+      "H1-Emulator",
+      "H2-Emulator",
+      "aer_simulator",
+      "sv1"
+    ],
+    "beta": 0.4,
+    "decision_rule": "PASS if optimum-state mass >= uniform mass minus envelope 4*sqrt(0.5/shots); honest toy receipt, no advantage claimed",
+    "edges": [
+      [
+        0,
+        1,
+        3
+      ],
+      [
+        1,
+        2,
+        1
+      ],
+      [
+        2,
+        3,
+        4
+      ],
+      [
+        3,
+        0,
+        2
+      ]
+    ],
+    "gamma": 0.5,
+    "jobs": [
+      "J0 bedside bloods (urgency .9)",
+      "J1 imaging request (urgency .6)",
+      "J2 review NEWS7 (urgency 1.0)",
+      "J3 referral (urgency .4)"
+    ],
+    "mapping": "node per job; NOW=0 vs NEXT=1; edge weight = walking + dependency conflict; Max-Cut split maximises separated conflict",
+    "project": "NHS Quantum",
+    "shots": 256
+  },
+  "classical_optimum": 10,
+  "optimum_states": [
+    "0101",
+    "1010"
+  ],
+  "backends": {
+    "H1-1LE": {
+      "job_id": "7f8ad56f-1b1e-4b1c-9e97-7adb7a6f3371",
+      "counts": {
+        "0001": 46,
+        "1111": 41,
+        "0000": 36,
+        "1110": 35,
+        "1010": 25,
+        "0101": 23,
+        "1011": 21,
+        "0100": 16
+      },
+      "shots": 256,
+      "optimum_mass": 0.1875,
+      "uniform_mass": 0.125,
+      "envelope": 0.1768,
+      "verdict": "PASS",
+      "backend_qualifier": "emulator",
+      "note": "QAOA p=1 unoptimized angles; optimum states ranked #5/#6 of 16. Execution receipt only, no advantage claimed."
+    },
+    "H2-1LE": {
+      "execute_job_id": "f20bfc79-76b1-4014-8bb7-bb45e3155b30",
+      "status": "queued"
+    },
+    "H1-Emulator": {
+      "execute_job_id": "0cb2f7e3-7702-437c-bdff-6e4e4ddc1a12",
+      "status": "queued"
+    },
+    "H2-Emulator": {
+      "execute_job_id": "b62ff544-d83a-4f48-b475-61874a5d5324",
+      "status": "queued"
+    },
+    "aer_simulator": {
+      "status": "honest-gap",
+      "note": "QuantinuumConfig rejected (400); needs provider-specific config, out of hackathon window"
+    },
+    "sv1": {
+      "status": "honest-gap",
+      "note": "QuantinuumConfig rejected (400); needs provider-specific config, out of hackathon window"
+    }
+  }
+}

@@ -65,6 +65,8 @@ A PASS certifies *reproducible execution*, not quantum advantage.
 | H2-Emulator (noisy) | ✅ job `b62ff544` | 256 shots, opt-mass **0.1680** → PASS |
 | aer_simulator | ✅ job `a26a8386` | fixed with `AerConfig` (not `QuantinuumConfig`); opt-mass **0.125** = exactly uniform, reported as-is |
 | sv1 (Braket) | ⚠️ honest gap | `BraketConfig(local=False)` needs an AWS s3 bucket; `local=True` hit a Nexus 500 — recorded, not retried blind |
+| **Helios-1E-lite** (Guppy→HUGR lane) | ✅ jobs `0fc1f87b` / `67f9d2f4` | next-gen stack, native HUGR execution at 26q: **GHZ 512/512 shots (mass 1.0000)** + whole-ward QAOA mean-cut 43.61 vs 43.05 uniform — see §9 |
+| H1-1LE (F-VQE trained) | ✅ job `bb1021a2` | 256 shots, opt-mass **1.0000** — every shot on `1010`/`0101` — see §11 |
 
 Full counts: [`quantum/ward_shift_receipts.json`](quantum/ward_shift_receipts.json).
 QAOA angles are unoptimized and p=1 is shallow, so the optimum states rank #5/#6 rather than #1 —

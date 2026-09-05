@@ -17,11 +17,11 @@ anchored in the 8 conventions (framing, numbers, toggles, receipts, secrets, sta
 **Hero sub-head:**
 > All 26 qubits — one per ward job — entangled in a perfect GHZ state on **Quantinuum Helios** (512/512 shots, job `0fc1f87b`), and a 4-qubit shift-split driven to **100% optimum mass** with Quantinuum's own F-VQE method (job `bb1021a2`). Receipts for everything, advantage claimed for nothing.
 
-**Hero stat cards (3-up):**
-- `98/98` qubits — Helios's full published capacity — perfect GHZ, 256/256 shots
-- `26/26` qubits in a perfect GHZ on Helios — 512/512 shots
-- `100%` optimum-state mass after F-VQE training — 256/256 shots
-- `6` Nexus backends receipted (H1/H2 lanes + Helios HUGR + Aer)
+**Hero stat cards (4-up):**
+- `98/98` qubits — Helios's full published capacity — perfect GHZ + tamper-evident parity receipt, 256/256 shots each
+- `100%` optimum-state mass after F-VQE training (Quantinuum's published method) — 256/256 shots
+- `4q → 98q` scale ladder receipted in ONE day, every rung a live Nexus job ID
+- `CQM v1.3` — the methodology itself upgraded and versioned from this hack
 
 **Key section titles (H2):**
 - The problem: Where jobs get lost in handovers
@@ -239,9 +239,31 @@ if (MODE === "live") {
 
 ## 5. Footer copy
 
-> Module built with **Claude Fable 5.1**. Quantum circuits via pytket + Nexus.  
+> Module built with **Claude Fable 5.1** under **CQM v1.3**. Quantum circuits via pytket + Guppy/HUGR on Quantinuum Nexus.  
 > Receipts: H1-1LE ✅ 0.1875 · H2-1LE ✅ 0.1367 · H1-Em ✅ 0.1523 · H2-Em ✅ 0.1680 · Aer ✅ 0.125 (uniform, honest) · sv1 ⚠️ gap. Scale-up: 8q p=2 ×4 (honest negative) · **26q GHZ on Helios PERFECT — 512/512 shots, GHZ-mass 1.0** · 26q QAOA mean-cut 43.61 vs 43.05 uniform (explores, F-VQE is the fix) · H2-1LE cross-check running.  
 > Documentation: [docs/QUANTUM_SPOTLIGHT.md](docs/QUANTUM_SPOTLIGHT.md) · [quantum/README.md](quantum/README.md)
+
+---
+
+## 5b. Methodology & persona footer (for an "How we work" page block)
+
+> Built under **Clinical Quantum Methodology v1.3** — problem-first, pre-registered bars,
+> honest negatives as deliverables, one published method upgrade allowed, then the verdict
+> stands. Emulator scale = "hardware-scale readiness", never "quantum advantage".
+>
+> The repo ships its own working style as three portable artifacts:
+> **AGENT_SOUL.md** (the world-class clinical quantum agent engineer creed) ·
+> **skills/quantinuum/SKILL.md** (executable pitfalls) ·
+> **docs/clinical-quantum-methodology.md** (the gates). Load all three into any capable
+> agent and it reproduces this practice.
+
+**Timeline card (renders well as a vertical stepper):**
+1. 4q toy, 6 backends receipted — weak PASS reported honestly
+2. F-VQE upgrade (Amaro 2022) → 100% optimum, certified job `bb1021a2`
+3. 8q p=2 — honest negative, committed
+4. 26q whole ward on Helios (Guppy→HUGR) — GHZ perfect 512/512
+5. **98q — full Helios capacity** — GHZ + parity receipt, both perfect 256/256
+6. Methodology upgraded to CQM v1.3, persona + skill versioned in-repo
 
 ---
 

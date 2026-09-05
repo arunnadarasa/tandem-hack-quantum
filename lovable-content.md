@@ -285,6 +285,18 @@ receipts attached."
 
 ---
 
+## 5d. Team-access page block (`/quantum/team`)
+
+**Headline:** "Any team member can fire a quantum receipt from Telegram."
+
+Render the command table from [`telegram/README.md`](telegram/README.md) as chat-bubble mockups:
+user says *"check the quantum computer works"* → bot suggests "Bell test, 2q, 100 shots on
+H1-1LE — reply 'yes'" → user: "yes" → bot returns the receipt. Emphasise the consent gate:
+nothing submits without an explicit yes. Demo beat: `/nexus status 7f8ad56f` live-checks this
+repo's own 4q receipt from a phone.
+
+---
+
 ## 6. What NOT to say
 
 - ❌ “Quantum beats classical at job sorting”

@@ -97,6 +97,7 @@ see [`quantum/README.md`](quantum/README.md)):
 | [`quantum/ward_shift_receipts.json`](quantum/ward_shift_receipts.json) | Live Nexus receipts (QAS-style: job IDs, counts, envelope, verdict) |
 | [`quantum/README.md`](quantum/README.md) | CQM framing: phases, 10-Year Plan anchor, verdict rule |
 | [`docs/QUANTUM_CARD.md`](docs/QUANTUM_CARD.md) | **Quantum model card** (arXiv:2412.13151 × NVIDIA skill-card): entity, intended use, all receipts, limitations, trust controls |
+| [`telegram/`](telegram/) | **Team lane: run Nexus jobs from Telegram** — `/nexus` dispatcher, plain-English mode with consent gate, phone-checkable receipts |
 | [`src/lib/quantumShift.js`](src/lib/quantumShift.js) | Frontend mirror: classical split + receipt display data for WardFlow |
 
 ## 7. Run it
@@ -254,3 +255,11 @@ Everitt & Ji (*Model Cards for Quantum Technologies Reporting*, arXiv:2412.13151
 the NVIDIA-verified skill-card trust template (cataloged / scanned / evaluated / documented).
 One table holds every circuit, backend, job ID and verdict; one section holds every limitation.
 If a number on the card drifts from `quantum/*.json`, that's a bug.
+
+## 15. Team lane — quantum receipts from Telegram
+
+Vendored from [`telegram-quantum-hermes`](https://github.com/arunnadarasa/telegram-quantum-hermes):
+any team member can run Nexus jobs from a phone via a Hermes Telegram gateway — `/nexus bench`,
+`/nexus backend H1-1LE`, `/nexus status 7f8ad56f` (live-check this repo's receipts mid-demo).
+Plain-English mode suggests qubits/shots/backend and **submits nothing without an explicit
+"yes"** (CQM consent + cost discipline). Setup + command table: [`telegram/README.md`](telegram/README.md).

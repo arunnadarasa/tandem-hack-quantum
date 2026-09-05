@@ -124,10 +124,17 @@ H2-1LE 13.11, H1-Emulator 13.36, H2-Emulator 12.92 — but optimum-state mass is
 (0.01–0.04): unoptimized p=2 angles explore, they don't concentrate. Honest negative, committed
 in [`quantum/ward_shift_8q_receipts.json`](quantum/ward_shift_8q_receipts.json).
 
-**26-qubit hardware-scale readiness demo (RUNNING):** whole-ward NOW/NEXT split — 26 jobs,
-39 weighted edges, QAOA p=1 (117 gates) + 26q GHZ (52 gates), 512 shots each.
-Three lanes in flight: H2-1LE (pytket lane, job `48f53972`) and Helios-1E-lite
-(Guppy→HUGR lane, jobs `0fc1f87b` GHZ / `67f9d2f4` QAOA).
+**26-qubit hardware-scale readiness demo — Helios lane COMPLETE:** whole-ward NOW/NEXT split —
+26 jobs, 39 weighted edges, QAOA p=1 (117 gates) + 26q GHZ (52 gates), 512 shots each, run as
+native Guppy→HUGR programs on **Helios-1E-lite** (Quantinuum's next-generation stack):
+
+| Program | Job | Result |
+|---|---|---|
+| 26q GHZ (entanglement scale) | `0fc1f87b` | **Perfect: 512/512 shots on `0…0`/`1…1`** (272+240), GHZ-mass **1.0000** — 26 qubits fully entangled, only 2 distinct outcomes |
+| 26q QAOA p=1 (whole-ward split) | `67f9d2f4` | Mean sampled cut **43.61** vs 43.05 uniform-random baseline; 512 distinct states over a 67M-state space — explores, doesn't concentrate (consistent with the 8q finding; F-VQE is the known fix) |
+| Same pair, pytket lane (H2-1LE) | `48f53972` | still RUNNING — cross-lane check pending |
+
+Full counts: [`quantum/ward26_results.json`](quantum/ward26_results.json).
 
 **Wording rule (binding):** a 26-qubit emulator run shows **scale trajectory / hardware-scale
 readiness**, NOT quantum advantage — it is still classically simulable. Advantage stays a

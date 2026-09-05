@@ -106,6 +106,7 @@ own published method and put every single shot on the optimum. Receipt attached.
 - 5/6 backends receipted (Aer fixed via AerConfig); sv1 = honest gap (AWS bucket needed)
 - 8q p=2: mean sampled cut beats uniform on all 4 backends, but optimum mass tiny — honest negative
 - 26q = 'hardware-scale readiness', NEVER 'quantum advantage' (still classically simulable)
+- **26q GHZ slide beat:** "We entangled all 26 qubits — one per ward job — on Quantinuum's next-gen Helios stack. Every one of 512 shots collapsed to all-NOW or all-NEXT: textbook GHZ, receipt attached." (job `0fc1f87b`)
 - Classical sort stays the decision-maker
 - **No quantum advantage claimed** — this is a tamper-evident seal, not a classifier
 
@@ -201,7 +202,7 @@ if (MODE === "live") {
 ## 5. Footer copy
 
 > Module built with **Claude Fable 5.1**. Quantum circuits via pytket + Nexus.  
-> Receipts: H1-1LE ✅ 0.1875 · H2-1LE ✅ 0.1367 · H1-Em ✅ 0.1523 · H2-Em ✅ 0.1680 · Aer ✅ 0.125 (uniform, honest) · sv1 ⚠️ gap. Scale-up: 8q p=2 done ×4 (mean-cut beats uniform, opt-mass tiny — honest negative) · 26q H2-1LE + Helios HUGR running.  
+> Receipts: H1-1LE ✅ 0.1875 · H2-1LE ✅ 0.1367 · H1-Em ✅ 0.1523 · H2-Em ✅ 0.1680 · Aer ✅ 0.125 (uniform, honest) · sv1 ⚠️ gap. Scale-up: 8q p=2 ×4 (honest negative) · **26q GHZ on Helios PERFECT — 512/512 shots, GHZ-mass 1.0** · 26q QAOA mean-cut 43.61 vs 43.05 uniform (explores, F-VQE is the fix) · H2-1LE cross-check running.  
 > Documentation: [docs/QUANTUM_SPOTLIGHT.md](docs/QUANTUM_SPOTLIGHT.md) · [quantum/README.md](quantum/README.md)
 
 ---

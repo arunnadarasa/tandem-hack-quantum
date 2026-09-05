@@ -267,12 +267,31 @@ if (MODE === "live") {
 
 ---
 
+## 5c. Quantum card page block (`/quantum/card`)
+
+Render [`docs/QUANTUM_CARD.md`](docs/QUANTUM_CARD.md) as a structured card page — it follows
+**Everitt & Ji arXiv:2412.13151** (quantum model cards) × the **NVIDIA skill-card** trust template.
+
+**Card hero:** "Every circuit, every backend, every job ID, every limitation — one card."
+
+**Sections to render as accordions:** Entity Details · Intended Use (with the ❌ out-of-scope
+row prominent) · Quantum System Characteristics · Circuits & Performance (the 7-row receipts
+table IS the centerpiece — render as a sortable table) · Evaluation Conditions · Limitations &
+Risks (numbered, honest) · Trust Controls (cataloged/scanned/evaluated/signed/documented status
+chips — "signed" chip shows *future work*, don't fake it).
+
+**Judge line:** "Quantum technologies need model cards the way ML did — here's ours,
+receipts attached." 
+
+---
+
 ## 6. What NOT to say
 
 - ❌ “Quantum beats classical at job sorting”
 - ❌ “The QPU decided the schedule”
 - ❌ “NICE recommends quantum verification”
 - ❌ Any cancer/BCAC/etc. references
+- ❌ Rendering the "signed" trust chip as done (it's future work on the card)
 
 ---
 

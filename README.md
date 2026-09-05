@@ -96,6 +96,7 @@ see [`quantum/README.md`](quantum/README.md)):
 | [`quantum/ward_shift_submit.py`](quantum/ward_shift_submit.py) | Submit-only helper: journals job IDs and exits fast (survives queue backlogs) |
 | [`quantum/ward_shift_receipts.json`](quantum/ward_shift_receipts.json) | Live Nexus receipts (QAS-style: job IDs, counts, envelope, verdict) |
 | [`quantum/README.md`](quantum/README.md) | CQM framing: phases, 10-Year Plan anchor, verdict rule |
+| [`docs/QUANTUM_CARD.md`](docs/QUANTUM_CARD.md) | **Quantum model card** (arXiv:2412.13151 × NVIDIA skill-card): entity, intended use, all receipts, limitations, trust controls |
 | [`src/lib/quantumShift.js`](src/lib/quantumShift.js) | Frontend mirror: classical split + receipt display data for WardFlow |
 
 ## 7. Run it
@@ -229,3 +230,11 @@ that built this repo: the creed (problem-first, receipts-or-it-didn't-happen, ho
 wording discipline, pre-registration, journal-at-submit), the operating loop, and the voice.
 Pair it with [`skills/quantinuum/SKILL.md`](skills/quantinuum/SKILL.md) to reproduce this
 working style in any capable agent.
+
+## 14. Quantum card
+
+[`docs/QUANTUM_CARD.md`](docs/QUANTUM_CARD.md) — the layer's **quantum model card**, following
+Everitt & Ji (*Model Cards for Quantum Technologies Reporting*, arXiv:2412.13151) crossed with
+the NVIDIA-verified skill-card trust template (cataloged / scanned / evaluated / documented).
+One table holds every circuit, backend, job ID and verdict; one section holds every limitation.
+If a number on the card drifts from `quantum/*.json`, that's a bug.

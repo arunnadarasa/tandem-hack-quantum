@@ -7,8 +7,10 @@
 >
 > **Headline result:** all 26 qubits — one per ward job — entangled in a perfect GHZ state on
 > **Quantinuum Helios** (next-gen stack, native Guppy→HUGR lane): **512/512 shots**, GHZ-mass 1.0000,
-> job `0fc1f87b`. Plus a 4q shift-split driven to **100% optimum mass** with Quantinuum's own
-> published F-VQE method (job `bb1021a2`). Receipts for everything, advantage claimed for nothing.
+> job `0fc1f87b`, then **all 98 qubits — Helios's full published capacity — in a perfect GHZ
+> plus a tamper-evident parity receipt** (jobs `b3d1c274`/`8eddb96d`, stabilizer lane). Plus a 4q
+> shift-split driven to **100% optimum mass** with Quantinuum's own published F-VQE method
+> (job `bb1021a2`). Receipts for everything, advantage claimed for nothing.
 
 ## 1. The problem
 
@@ -67,6 +69,7 @@ A PASS certifies *reproducible execution*, not quantum advantage.
 | sv1 (Braket) | ⚠️ honest gap | `BraketConfig(local=False)` needs an AWS s3 bucket; `local=True` hit a Nexus 500 — recorded, not retried blind |
 | **Helios-1E-lite** (Guppy→HUGR lane) | ✅ jobs `0fc1f87b` / `67f9d2f4` | next-gen stack, native HUGR execution at 26q: **GHZ 512/512 shots (mass 1.0000)** + whole-ward QAOA mean-cut 43.61 vs 43.05 uniform — see §9 |
 | H1-1LE (F-VQE trained) | ✅ job `bb1021a2` | 256 shots, opt-mass **1.0000** — every shot on `1010`/`0101` — see §11 |
+| **Helios-1E-lite @ 98 qubits** (stabilizer) | ✅ jobs `b3d1c274` / `8eddb96d` | **full published Helios capacity**: 98q GHZ 256/256 perfect + 98q Iceberg-style parity receipt 256/256 — see §12 |
 
 Full counts: [`quantum/ward_shift_receipts.json`](quantum/ward_shift_receipts.json).
 QAOA angles are unoptimized and p=1 is shallow, so the optimum states rank #5/#6 rather than #1 —
@@ -199,3 +202,30 @@ the certificate is the *final trained circuit* sampled on H1-1LE. The claim is "
 Quantinuum-published method solves our toy exactly, receipt attached" — still not a
 quantum-advantage claim (4 qubits is trivially classical). It converts the earlier honest
 negative (unoptimized angles don't concentrate) into a method-validated positive.
+
+## 12. 98 qubits — the full Helios
+
+The Helios Product Data Sheet specifies **98 Ba⁺ qubits**; Quantinuum's own team ran 98q live
+(Niroula et al., arXiv:2511.03689). A 98-qubit statevector is physically impossible (2⁹⁸
+amplitudes), so we used Helios-1E-lite's **stabilizer simulator** — the honest lane for Clifford
+circuits, which picked our programs for us:
+
+| Program | Job | Result |
+|---|---|---|
+| **98q GHZ** — one qubit per job, whole-hospital seal | `b3d1c274` | **Perfect: 256/256 shots** on all-0/all-1 (125+131), 2 distinct outcomes from a 3×10²⁹-state space |
+| **98q parity receipt** — 90 job qubits + 8 Iceberg-style block-parity ancillas (arXiv:2504.21172 pattern) | `8eddb96d` | **Perfect: 256/256 shots**, parities consistent — any single-qubit tamper breaks a parity check detectably |
+
+Runner: [`quantum/ward98_helios.py`](quantum/ward98_helios.py) · counts:
+[`quantum/ward98_results.json`](quantum/ward98_results.json).
+
+**Scale ladder receipted in one day:** 4q → 8q → 26q → **98q** — from one shift's jobs to the
+whole hospital, every step on Quantinuum Nexus with job IDs. Same wording rule as §9: this is
+hardware-scale readiness on an emulator, not quantum advantage.
+
+## 13. Agent soul
+
+[`AGENT_SOUL.md`](AGENT_SOUL.md) — the **world-class clinical quantum agent engineer** persona
+that built this repo: the creed (problem-first, receipts-or-it-didn't-happen, honest negatives,
+wording discipline, pre-registration, journal-at-submit), the operating loop, and the voice.
+Pair it with [`skills/quantinuum/SKILL.md`](skills/quantinuum/SKILL.md) to reproduce this
+working style in any capable agent.

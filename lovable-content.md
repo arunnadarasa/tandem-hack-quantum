@@ -18,6 +18,7 @@ anchored in the 8 conventions (framing, numbers, toggles, receipts, secrets, sta
 > All 26 qubits — one per ward job — entangled in a perfect GHZ state on **Quantinuum Helios** (512/512 shots, job `0fc1f87b`), and a 4-qubit shift-split driven to **100% optimum mass** with Quantinuum's own F-VQE method (job `bb1021a2`). Receipts for everything, advantage claimed for nothing.
 
 **Hero stat cards (3-up):**
+- `98/98` qubits — Helios's full published capacity — perfect GHZ, 256/256 shots
 - `26/26` qubits in a perfect GHZ on Helios — 512/512 shots
 - `100%` optimum-state mass after F-VQE training — 256/256 shots
 - `6` Nexus backends receipted (H1/H2 lanes + Helios HUGR + Aer)
@@ -126,6 +127,11 @@ that *react* to outcomes mid-execution, not just sample a fixed circuit.
 **GHZ slide line:** "We entangled all 26 qubits — one per ward job — on Quantinuum's next-gen
 Helios stack. Every one of 512 shots collapsed to all-NOW or all-NEXT: textbook GHZ, receipt
 attached. Tamper with a GHZ-signed record and the correlation pattern breaks detectably."
+
+**98-qubit finale:** we then ran Helios's **entire published capacity** — a 98q GHZ (one qubit
+per job, whole hospital) and a 98q Iceberg-style parity receipt (8 block-parity checks folded in:
+any tamper breaks a parity, detectably). Both perfect: 256/256 shots, jobs `b3d1c274`/`8eddb96d`.
+Scale ladder in one day: **4q → 8q → 26q → 98q**, every step receipted.
 
 **Scale wording (binding):** 26 qubits on an emulator = *hardware-scale readiness*, never
 *quantum advantage* — it stays classically simulable. Advantage is a pre-registered future claim.

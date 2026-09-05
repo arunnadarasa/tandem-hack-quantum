@@ -39,6 +39,7 @@ HELP = textwrap.dedent("""\
     /nexus status <job_id> — check a job (full id or first 8 chars)
     /nexus jobs [n] — your recent jobs (default 5)
     /nexus backend <name> — 2-qubit Bell health test on a named backend
+    /nexus wardshift [shots] [backend] [fvqe] — WardFlow NOW/NEXT shift-split receipt (default 256 shots, H1-1LE; add 'fvqe' for the trained 100%-optimum circuit)
     Tip: just describe your goal in plain words and I'll suggest qubits, shots and backend first.""")
 
 FALLBACK_BACKENDS = ["H1-1LE", "H2-1LE", "Helios-1E-lite"]
@@ -144,6 +145,41 @@ _BELL_2Q = """\
 c = Circuit(2, 2)
 c.H(0); c.CX(0, 1)
 c.Measure(0, 0); c.Measure(1, 1)
+"""
+
+# WardFlow shift-split (tandem-hack-quantum): 4 ward jobs -> NOW/NEXT Max-Cut.
+# Mirrors quantum/ward_shift_circuit.py (QAOA p=1, halfturns gamma=0.5 beta=0.4);
+# optimum cut=10 at 0101/1010 — verdict computed against uniform 0.125.
+_WARDSHIFT_4Q = """\
+from pytket.circuit import OpType
+c = Circuit(4, 4)
+for q in range(4):
+    c.H(q)
+for i, j, w in [(0, 1, 3), (1, 2, 1), (2, 3, 4), (3, 0, 2)]:
+    c.add_gate(OpType.ZZPhase, 0.5 * w, [i, j])
+for q in range(4):
+    c.add_gate(OpType.Rx, 0.4, [q])
+for q in range(4):
+    c.Measure(q, q)
+"""
+
+# F-VQE-trained twin (Amaro 2022): fixed trained Ry angles from
+# quantum/ward_shift_fvqe_training.json — certified 1.0000 opt-mass on H1-1LE.
+_WARDSHIFT_FVQE_4Q_HEADER = """\
+import json, math
+_params = json.load(open(
+    "__FVQE_JSON__"))["params"]
+c = Circuit(4, 4)
+_k = 0
+for _layer in range(2):
+    for q in range(4):
+        c.Ry(_params[_k] / math.pi, q); _k += 1
+    for q in range(4):
+        c.CX(q, (q + 1) % 4)
+for q in range(4):
+    c.Ry(_params[_k] / math.pi, q); _k += 1
+for q in range(4):
+    c.Measure(q, q)
 """
 
 
@@ -366,6 +402,43 @@ def handle_nexus_command(text):
             name = args[0]
             rc, out, err = _submit(_BELL_2Q, "bell_health_2q", name, 100)
             return _fmt_run("Bell health test on " + name, out, err)
+
+        if sub == "wardshift":
+            # /nexus wardshift [shots] [backend] [fvqe] — WardFlow NOW/NEXT receipt
+            shots = _shots(args[0] if args else None, default=256)
+            backend = next((a for a in args[1:] if not a.isdigit() and a != "fvqe"), "H1-1LE")
+            use_fvqe = "fvqe" in [a.lower() for a in args]
+            fvqe_json = str(Path(__file__).resolve().parent.parent.parent
+                            / "quantum" / "ward_shift_fvqe_training.json")
+            if use_fvqe and Path(fvqe_json).exists():
+                circ = _WARDSHIFT_FVQE_4Q_HEADER.replace("__FVQE_JSON__", fvqe_json)
+                title = "WardFlow shift-split F-VQE 4q (trained, Amaro 2022) on " + backend
+                name = "wardshift_fvqe_4q"
+            else:
+                if use_fvqe:
+                    return ("❌ fvqe requested but trained params not found at\n"
+                            + fvqe_json + "\nRunning nothing. Use plain: /nexus wardshift")
+                circ = _WARDSHIFT_4Q
+                title = "WardFlow shift-split QAOA 4q on " + backend
+                name = "wardshift_qaoa_4q"
+            rc, out, err = _submit(circ, name, backend, shots)
+            reply = _fmt_run(title, out, err)
+            if "OK backend" in out:
+                # honest verdict: optimum-state mass vs uniform 0.125
+                opt = 0.0
+                for line in out.splitlines():
+                    ls = line.strip()
+                    if ls.startswith(("(0, 1, 0, 1)", "(1, 0, 1, 0)", "0101", "1010")):
+                        try:
+                            opt += float(ls.rsplit("(", 1)[1].rstrip(")"))
+                        except (IndexError, ValueError):
+                            pass
+                import math as _m
+                env = 4 * _m.sqrt(0.5 / max(shots, 1))
+                reply += ("\n🧾 Receipt: optimum-state mass %.3f vs 0.125 uniform "
+                          "(envelope ±%.3f). Execution receipt only — no quantum "
+                          "advantage claimed." % (opt, env))
+            return reply
 
         return "❓ Unknown /nexus subcommand '%s'.\n%s" % (sub, HELP)
     except Exception as exc:  # never break the gateway

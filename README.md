@@ -263,3 +263,7 @@ any team member can run Nexus jobs from a phone via a Hermes Telegram gateway â€
 `/nexus backend H1-1LE`, `/nexus status 7f8ad56f` (live-check this repo's receipts mid-demo).
 Plain-English mode suggests qubits/shots/backend and **submits nothing without an explicit
 "yes"** (CQM consent + cost discipline). Setup + command table: [`telegram/README.md`](telegram/README.md).
+
+**`/nexus wardshift` is wired**: any teammate can fire this repo's own shift-split from a phone
+â€” `wardshift 256` (QAOA) or `wardshift 256 H1-1LE fvqe` (trained circuit). Live-tested:
+job `4d072831`, 100/100 shots on the optimum, honest receipt line auto-appended.

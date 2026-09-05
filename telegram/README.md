@@ -20,6 +20,7 @@ Source skill: [`arunnadarasa/telegram-quantum-hermes`](https://github.com/arunna
 | `/nexus bench [shots]` | pathway + attestation with ±4√(0.5/shots) verdict |
 | `/nexus status <job_id>` | check any job (8-char prefix works) — e.g. the IDs in this repo's receipts |
 | `/nexus jobs [n]` | your recent jobs |
+| **`/nexus wardshift [shots] [backend] [fvqe]`** | **WardFlow NOW/NEXT shift-split receipt** — this repo's own circuit; add `fvqe` for the trained 100%-optimum version. Live-tested: job `4d072831`, 100/100 shots optimal |
 
 ## Plain-English mode (clinicians welcome)
 
@@ -32,8 +33,11 @@ is CQM discipline: cost-aware, consent-first.
 
 - `/nexus status 7f8ad56f` → live-checks this repo's 4q receipt from a phone mid-demo.
 - The dispatcher (`telegram/dispatcher/nexus_cmd.py`) is stdlib-only; all qnexus work runs
-  in a Hermes-venv subprocess. Adding a `/nexus wardshift` subcommand that submits
-  `quantum/ward_shift_submit.py` is a ~20-line patch on the existing pattern.
+  in a Hermes-venv subprocess.
+- **`/nexus wardshift` is wired and live-tested**: submits this repo's 4q shift-split
+  (QAOA, or the F-VQE-trained circuit with `fvqe`), waits, and replies with counts plus an
+  honest receipt line (optimum-mass vs uniform, envelope, no-advantage disclaimer).
+  Verified: `/nexus wardshift 100 fvqe` → job `4d072831`, 100/100 shots on `1010`/`0101`.
 
 ## Setup (one person on the team)
 

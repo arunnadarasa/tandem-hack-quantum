@@ -54,11 +54,12 @@ A PASS certifies *reproducible execution*, not quantum advantage.
 
 | Backend | Status | Result |
 |---|---|---|
-| H1-1LE | ✅ COMPLETED — job `7f8ad56f` | 256 shots, opt-mass **0.19** vs 0.125 uniform → **PASS**. Top states: `0001` 46, `1111` 41, `0000` 36, `1110` 35, `1010` 25, `0101` 23 |
-| H2-1LE | ⏳ queued — job `f20bfc79` | pending |
-| H1-Emulator | ⏳ queued — job `0cb2f7e3` | pending (noisy; expect 10–40 min) |
-| H2-Emulator | ⏳ queued — job `b62ff544` | pending (noisy; expect 10–40 min) |
-| Aer / sv1 | ⚠️ honest gap | `QuantinuumConfig` rejected (400) — needs provider-specific config, out of hackathon window |
+| H1-1LE | ✅ job `7f8ad56f` | 256 shots, opt-mass **0.1875** vs 0.125 uniform → **PASS** |
+| H2-1LE | ✅ job `f20bfc79` | 256 shots, opt-mass **0.1367** → PASS (weak, flagged) |
+| H1-Emulator (noisy) | ✅ job `0cb2f7e3` | 256 shots, opt-mass **0.1523** → PASS |
+| H2-Emulator (noisy) | ✅ job `b62ff544` | 256 shots, opt-mass **0.1680** → PASS |
+| aer_simulator | ✅ job `a26a8386` | fixed with `AerConfig` (not `QuantinuumConfig`); opt-mass **0.125** = exactly uniform, reported as-is |
+| sv1 (Braket) | ⚠️ honest gap | `BraketConfig(local=False)` needs an AWS s3 bucket; `local=True` hit a Nexus 500 — recorded, not retried blind |
 
 Full counts: [`quantum/ward_shift_receipts.json`](quantum/ward_shift_receipts.json).
 QAOA angles are unoptimized and p=1 is shallow, so the optimum states rank #5/#6 rather than #1 —
@@ -114,3 +115,28 @@ node -e "import('./src/lib/quantumShift.js').then(m=>console.log(m.classicalShif
 **15-second spoken line:** "The ward plan is made classically, exactly as today. Then a tiny quantum job
 on Quantinuum's stack signs it, giving the next shift a receipt nobody can fake. Small circuit, real
 receipt, honest claim."
+
+## 9. Scale-up receipts (8q and 26q)
+
+**8-qubit, QAOA p=2, 512 shots, 4 backends (COMPLETED):** optimum cut = 23 (2 states of 256).
+Mean sampled cut beats the uniform baseline (12.49) on all four backends — H1-1LE 12.92,
+H2-1LE 13.11, H1-Emulator 13.36, H2-Emulator 12.92 — but optimum-state mass is tiny
+(0.01–0.04): unoptimized p=2 angles explore, they don't concentrate. Honest negative, committed
+in [`quantum/ward_shift_8q_receipts.json`](quantum/ward_shift_8q_receipts.json).
+
+**26-qubit hardware-scale readiness demo (RUNNING):** whole-ward NOW/NEXT split — 26 jobs,
+39 weighted edges, QAOA p=1 (117 gates) + 26q GHZ (52 gates), 512 shots each.
+Three lanes in flight: H2-1LE (pytket lane, job `48f53972`) and Helios-1E-lite
+(Guppy→HUGR lane, jobs `0fc1f87b` GHZ / `67f9d2f4` QAOA).
+
+**Wording rule (binding):** a 26-qubit emulator run shows **scale trajectory / hardware-scale
+readiness**, NOT quantum advantage — it is still classically simulable. Advantage stays a
+pre-registered future claim gated on real QPU runs with matched classical baselines.
+
+## 10. Hermes skill
+
+[`skills/quantinuum/SKILL.md`](skills/quantinuum/SKILL.md) — the full Quantinuum/Nexus agent
+skill used to build this repo, updated with this hackathon's lessons: AerConfig vs
+QuantinuumConfig, PhasedX two-param trap, Helios Guppy quirks (no zz_phase → CX·Rz·CX,
+output not result, measurement-array read pattern), and the submit-only/journal pattern
+that survives queue backlogs.

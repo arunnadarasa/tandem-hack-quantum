@@ -84,7 +84,9 @@ Result verified: envelope `4√(0.5/256) ≈ 0.088`, verdict **PASS**.
 ### The honesty footnote
 
 - Small circuit (4 qubits, 10 edges) = hackathon toy
-- 512 shots on noisy emulators queued; Aer/sv1 config gap recorded
+- 5/6 backends receipted (Aer fixed via AerConfig); sv1 = honest gap (AWS bucket needed)
+- 8q p=2: mean sampled cut beats uniform on all 4 backends, but optimum mass tiny — honest negative
+- 26q = 'hardware-scale readiness', NEVER 'quantum advantage' (still classically simulable)
 - Classical sort stays the decision-maker
 - **No quantum advantage claimed** — this is a tamper-evident seal, not a classifier
 
@@ -180,7 +182,7 @@ if (MODE === "live") {
 ## 5. Footer copy
 
 > Module built with **Claude Fable 5.1**. Quantum circuits via pytket + Nexus.  
-> 3-backed receipts: H1-1LE ✅, H2-1LE ⏳, H1-Emulator ⏳, H2-Emulator ⏳.  
+> Receipts: H1-1LE ✅ 0.1875 · H2-1LE ✅ 0.1367 · H1-Em ✅ 0.1523 · H2-Em ✅ 0.1680 · Aer ✅ 0.125 (uniform, honest) · sv1 ⚠️ gap. Scale-up: 8q p=2 done ×4 (mean-cut beats uniform, opt-mass tiny — honest negative) · 26q H2-1LE + Helios HUGR running.  
 > Documentation: [docs/QUANTUM_SPOTLIGHT.md](docs/QUANTUM_SPOTLIGHT.md) · [quantum/README.md](quantum/README.md)
 
 ---

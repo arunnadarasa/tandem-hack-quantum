@@ -1,0 +1,47 @@
+{
+  "optimum": 23,
+  "n_solutions": 2,
+  "solutions": [
+    "01101001",
+    "10010110"
+  ],
+  "uniform_mean_cut": 12.49,
+  "backends": {
+    "H1-1LE": {
+      "job_id": "e7e1a809-d632-4975-81ce-ee5fa41be318",
+      "shots": 512,
+      "optimum_mass": 0.0117,
+      "mean_sampled_cut": 12.92,
+      "distinct_states": 190,
+      "envelope": 0.125,
+      "backend_qualifier": "emulator"
+    },
+    "H2-1LE": {
+      "job_id": "54e882ee-43ef-43d7-a8d6-446a9871ab8f",
+      "shots": 512,
+      "optimum_mass": 0.0176,
+      "mean_sampled_cut": 13.11,
+      "distinct_states": 194,
+      "envelope": 0.125,
+      "backend_qualifier": "emulator"
+    },
+    "H1-Emulator": {
+      "job_id": "53537b33-758c-49c0-8a83-c4e652a5c56b",
+      "shots": 512,
+      "optimum_mass": 0.0352,
+      "mean_sampled_cut": 13.36,
+      "distinct_states": 183,
+      "envelope": 0.125,
+      "backend_qualifier": "emulator"
+    },
+    "H2-Emulator": {
+      "job_id": "925e82e9-959b-4f79-a78f-de84ce6c8f9c",
+      "shots": 512,
+      "optimum_mass": 0.0156,
+      "mean_sampled_cut": 12.92,
+      "distinct_states": 185,
+      "envelope": 0.125,
+      "backend_qualifier": "emulator"
+    }
+  }
+}

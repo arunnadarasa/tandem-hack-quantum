@@ -70,24 +70,76 @@
       "note": "QAOA p=1 unoptimized angles; optimum states ranked #5/#6 of 16. Execution receipt only, no advantage claimed."
     },
     "H2-1LE": {
-      "execute_job_id": "f20bfc79-76b1-4014-8bb7-bb45e3155b30",
-      "status": "queued"
+      "job_id": "f20bfc79-76b1-4014-8bb7-bb45e3155b30",
+      "shots": 256,
+      "optimum_mass": 0.1367,
+      "uniform_mass": 0.125,
+      "envelope": 0.1768,
+      "verdict": "PASS",
+      "backend_qualifier": "emulator",
+      "top_states": {
+        "0000": 49,
+        "1111": 44,
+        "1110": 41,
+        "0001": 38,
+        "0101": 21
+      },
+      "note": "Barely above uniform; all-0/all-1 dominate (unoptimized angles). PASS per lenient bar, flagged weak."
     },
     "H1-Emulator": {
-      "execute_job_id": "0cb2f7e3-7702-437c-bdff-6e4e4ddc1a12",
-      "status": "queued"
+      "job_id": "0cb2f7e3-7702-437c-bdff-6e4e4ddc1a12",
+      "shots": 256,
+      "optimum_mass": 0.1523,
+      "uniform_mass": 0.125,
+      "envelope": 0.1768,
+      "verdict": "PASS",
+      "backend_qualifier": "emulator",
+      "top_states": {
+        "0000": 42,
+        "1111": 41,
+        "0001": 35,
+        "1110": 34,
+        "0100": 29
+      },
+      "note": "Noisy emulator; optimum states below top-5."
     },
     "H2-Emulator": {
-      "execute_job_id": "b62ff544-d83a-4f48-b475-61874a5d5324",
-      "status": "queued"
+      "job_id": "b62ff544-d83a-4f48-b475-61874a5d5324",
+      "shots": 256,
+      "optimum_mass": 0.168,
+      "uniform_mass": 0.125,
+      "envelope": 0.1768,
+      "verdict": "PASS",
+      "backend_qualifier": "emulator",
+      "top_states": {
+        "1110": 44,
+        "0000": 41,
+        "0001": 39,
+        "1111": 38,
+        "1010": 26
+      },
+      "note": "Noisy emulator; 1010 in top-5."
     },
     "aer_simulator": {
-      "status": "honest-gap",
-      "note": "QuantinuumConfig rejected (400); needs provider-specific config, out of hackathon window"
+      "job_id": "a26a8386-3a45-4ec2-b27c-4f76c4aaf56b",
+      "shots": 256,
+      "optimum_mass": 0.125,
+      "uniform_mass": 0.125,
+      "envelope": 0.1768,
+      "verdict": "PASS",
+      "backend_qualifier": "simulator",
+      "top_states": {
+        "0001": 50,
+        "0000": 41,
+        "1110": 39,
+        "1111": 39,
+        "1011": 26
+      },
+      "note": "Fixed with AerConfig (not QuantinuumConfig). Opt-mass exactly uniform \u2014 reported as-is."
     },
     "sv1": {
       "status": "honest-gap",
-      "note": "QuantinuumConfig rejected (400); needs provider-specific config, out of hackathon window"
+      "note": "BraketConfig(local=False) requires s3_bucket/s3_folder (AWS account); local=True returned Nexus 500 (trace c6e7fe2b). Recorded honestly."
     }
   }
 }
